@@ -18,12 +18,16 @@ let client;
 async function init() {
     const host = HOST_FILE ? fs.readFileSync(HOST_FILE) : HOST;
     const user = USER_FILE ? fs.readFileSync(USER_FILE) : USER;
-    const password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE, 'utf8') : PASSWORD;
+    let password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE, 'utf8') : PASSWORD;
+password = password.trim()
+    console.log({password});
+
     const database = DB_FILE ? fs.readFileSync(DB_FILE) : DB;
+    console.log({database, host});
 
     await waitPort({ 
         host, 
-        port: 5432,
+       port: 5432,
         timeout: 10000,
         waitForDns: true,
     });
